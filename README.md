@@ -1,7 +1,16 @@
 # Serverless Vending Machine API - AWS Node.js Typescript
 
-Serverless Vending Machine API consists of 5 AWS lambda functions and connected to a DynamoDB.
-This project utilize Serverless Framework for Node.js and TypeScript.
+This is a serverless API that allows users to interact with a vending machine system. Users can read, create, delete, and purchase products from the vending machine using RESTful API endpoints. The project is built using Node.js, TypeScript, and the Serverless Framework, and is deployed on AWS.
+
+## Technologies Used
+
+Node.js
+TypeScript
+Serverless Framework
+AWS Lambda
+DynamoDB
+Mocha
+Chai
 
 ## Installation/deployment instructions
 
