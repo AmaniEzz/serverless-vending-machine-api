@@ -47,3 +47,7 @@ To remove all resources created on AWS run the following command:
 ## Test in Postman
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://god.gw.postman.com/run-collection/12743195-c5a465cf-fe98-4a35-b733-acbfe3d4f5db?action=collection%2Ffork&collection-url=entityId%3D12743195-c5a465cf-fe98-4a35-b733-acbfe3d4f5db%26entityType%3Dcollection%26workspaceId%3D4f515dc9-038a-44f7-a0f9-72e789044fdb)
+
+## Contributing
+
+If you would like to contribute to the project, please open a pull request with your changes.
