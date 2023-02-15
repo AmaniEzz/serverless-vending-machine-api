@@ -1,0 +1,99 @@
+service: vending-machine-api
+
+plugins:
+  - serverless-esbuild
+  - serverless-dynamodb-local
+  - serverless-offline
+
+provider:
+  name: aws
+  stage: dev
+  runtime: nodejs14.x
+  region: us-east-1
+  apiGateway:
+    shouldStartNameWithService: true
+
+custom:
+  stage: ${self:provider.stage}
+  productTableName: product-${self:custom.stage}
+  purchaseTableName: purchase-${self:custom.stage}
+  esbuild:
+    bundle: true
+    minify: false
+  dynamodb:
+    stages:
+      - dev
+    start:
+      port: 8000
+      inMemory: true
+      migrate: true
+
+functions:
+  createProduct:
+    handler: src/handlers/createProduct.createProduct
+    events:
+      - http:
+          path: /products
+          method: post
+          cors: true
+
+  getProduct:
+    handler: src/handlers/getProduct.getProduct
+    events:
+      - http:
+          path: /products/{productId}
+          method: get
+          cors: true
+
+  updateProduct:
+    handler: src/handlers/updateProduct.updateProduct
+    events:
+      - http:
+          path: /products/{productId}
+          method: put
+          cors: true
+
+  deleteProduct:
+    handler: src/handlers/deleteProduct.deleteProduct
+    events:
+      - http:
+          path: /products/{productId}
+          method: delete
+          cors: true
+
+  purchaseProduct:
+    handler: src/handlers/purchaseProduct.purchaseProduct
+    events:
+      - http:
+          path: products/purchase/{productId}
+          method: post
+          cors: true
+
+resources:
+  Resources:
+    ProductTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        AttributeDefinitions:
+          - AttributeName: productId
+            AttributeType: S
+        KeySchema:
+          - AttributeName: productId
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        TableName: ${self:custom.productTableName}
+    PurchaseTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        TableName: ${self:custom.purchaseTableName}
