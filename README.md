@@ -4,13 +4,11 @@ This is a serverless API that allows users to interact with a vending machine sy
 
 ## Technologies Used
 
-Node.js
-TypeScript
-Serverless Framework
-AWS Lambda
-DynamoDB
-Mocha
-Chai
+- Node.js
+- TypeScript
+- Serverless Framework
+- AWS Lambda
+- DynamoDB
 
 ## Installation/deployment instructions
 
